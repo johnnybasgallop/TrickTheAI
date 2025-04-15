@@ -17,7 +17,7 @@ public class GameSessionMapper {
              .build();
     }
 
-    public static GameSession toDomain(GameSession entity){
+    public static GameSession toDomain(GameSessionJpaEntity entity){
         if(entity == null) return null;
 
         return GameSession.builder()
