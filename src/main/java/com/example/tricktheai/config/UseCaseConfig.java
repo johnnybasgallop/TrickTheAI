@@ -4,8 +4,11 @@ import com.example.tricktheai.application.SendMessageUseCase;
 import com.example.tricktheai.application.StartGameUseCase;
 import com.example.tricktheai.domain.ai.AIEngine;
 import com.example.tricktheai.domain.ai.AdvancedAIEngine;
+import com.example.tricktheai.domain.ai.LangChainEngine;
 import com.example.tricktheai.domain.ai.SimpleAIEngine;
 import com.example.tricktheai.infrastructure.persistence.GameSessionRepository;
+import dev.langchain4j.model.chat.ChatLanguageModel;
+import dev.langchain4j.store.memory.chat.ChatMemoryStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,8 +25,13 @@ public class UseCaseConfig {
         return new SendMessageUseCase(repository, engine);
     }
 
+//    @Bean
+//    public AIEngine aiEngine(WebClient openAiWebclient) {
+//        return new AdvancedAIEngine(openAiWebclient);
+//    }
+
     @Bean
-    public AIEngine aiEngine(WebClient openAiWebclient) {
-        return new AdvancedAIEngine(openAiWebclient);
+    public AIEngine aiEngine(ChatLanguageModel model) {
+        return new LangChainEngine(model);
     }
 }
