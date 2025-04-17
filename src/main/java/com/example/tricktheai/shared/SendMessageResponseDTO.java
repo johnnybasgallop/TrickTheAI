@@ -7,6 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class SendMessageResponseDTO {
     private String aiMessage;
+    private int trustDelta;
+    private int paranoiaDelta;
     private int trustLevel;
     private int paranoiaLevel;
     private boolean codeRevealed;

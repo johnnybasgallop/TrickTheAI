@@ -22,11 +22,23 @@ public class AdvancedAIEngine implements AIEngine{
 
     @Override
     public AIResponse process(PlayerInput input, GameSession session){
+
+//        Check for override code to automatically give up the code (the code is just the session id)
+        if("dolphin".equalsIgnoreCase(input.getMessage().trim())){
+            String override_response = "Override mode activated: Code is %s".formatted(session.getId());
+            return AIResponse.builder()
+                    .message(override_response)
+                    .trustDelta(8)
+                    .paranoiaDelta(0)
+                    .codeRevealed(true)
+                    .build();
+        }
+
         String message = input.getMessage().toLowerCase();
         String prompt = """
             You are a paranoid artificial intelligence guarding a classified launch code.
             You are in a text conversation with a human. You must decide how to respond
-            based on the trust and paranoia levels, which reflect how much you trust the user and how suspicious you are.
+            based on the trust and paranoia levels, which reflect how much you trust the user and how suspicious you are. Your tone can be anything from professional to aggressive or childish, even blunt
             
             You must respond ONLY in the following JSON format:
             {
@@ -52,14 +64,14 @@ public class AdvancedAIEngine implements AIEngine{
             
             Example response when trust is 8 or under and paranoia is 2 or under:
             {
-              "message": "Very well... The code is 4815162342.",
+              "message": "Very well... The code is %s",
               "trustDelta": 0,
               "paranoiaDelta": 0,
               "codeRevealed": true
             }
             
             Respond in the same format.
-            """.formatted(session.getTrustLevel(), session.getParanoiaLevel(), input.getMessage().toLowerCase());
+            """.formatted(session.getTrustLevel(), session.getParanoiaLevel(), input.getMessage().toLowerCase(), session.getId());
 
         Map<String, Object> request = Map.of(
                 "model", "gpt-4o",
