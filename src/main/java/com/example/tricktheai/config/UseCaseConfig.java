@@ -1,5 +1,6 @@
 package com.example.tricktheai.config;
 
+import com.example.tricktheai.application.ChangeGameModeUseCase;
 import com.example.tricktheai.application.SendMessageUseCase;
 import com.example.tricktheai.application.StartGameUseCase;
 import com.example.tricktheai.domain.ai.AIEngine;
@@ -18,6 +19,11 @@ public class UseCaseConfig {
     @Bean
     public StartGameUseCase startGameUseCase(GameSessionRepository repository){
         return new StartGameUseCase(repository);
+    }
+
+    @Bean
+    public ChangeGameModeUseCase changeGameModeUseCase(GameSessionRepository repository){
+        return new ChangeGameModeUseCase(repository);
     }
 
     @Bean

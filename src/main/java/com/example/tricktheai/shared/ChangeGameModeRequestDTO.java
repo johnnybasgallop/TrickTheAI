@@ -1,12 +1,11 @@
 package com.example.tricktheai.shared;
 
-import lombok.Builder;
 import lombok.Data;
+import org.w3c.dom.Text;
 
 import java.util.UUID;
 @Data
-@Builder
-public class ChangeGameModeResponseDTO {
+public class ChangeGameModeRequestDTO {
     private UUID gameId;
-    private GameMode difficulty;
+    private String gameMode;
 }
