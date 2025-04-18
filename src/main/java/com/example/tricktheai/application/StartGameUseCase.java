@@ -4,6 +4,7 @@ import com.example.tricktheai.domain.model.GameSession;
 import com.example.tricktheai.infrastructure.mapper.GameSessionMapper;
 import com.example.tricktheai.infrastructure.persistence.GameSessionJpaEntity;
 import com.example.tricktheai.infrastructure.persistence.GameSessionRepository;
+import com.example.tricktheai.shared.GameMode;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -22,6 +23,7 @@ public class StartGameUseCase {
                 .paranoiaLevel(0)
                 .active(true)
                 .startedAt(LocalDateTime.now())
+                .difficulty(GameMode.Easy)
                 .build();
 
         GameSessionJpaEntity entity = GameSessionMapper.toEntity(newSession);

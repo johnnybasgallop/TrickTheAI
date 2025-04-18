@@ -1,9 +1,7 @@
 package com.example.tricktheai.infrastructure.persistence;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.tricktheai.shared.GameMode;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +23,7 @@ public class GameSessionJpaEntity {
     private int paranoiaLevel;
     private boolean active;
     private LocalDateTime startedAt;
+
+    @Enumerated(EnumType.STRING)
+    private GameMode difficulty;
 }

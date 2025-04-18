@@ -14,6 +14,7 @@ public class GameSessionMapper {
              .paranoiaLevel(session.getParanoiaLevel())
              .active(session.isActive())
              .startedAt(session.getStartedAt())
+             .difficulty(session.getDifficulty())
              .build();
     }
 
@@ -26,6 +27,7 @@ public class GameSessionMapper {
                 .paranoiaLevel(entity.getParanoiaLevel())
                 .active(entity.isActive())
                 .startedAt(entity.getStartedAt())
+                .difficulty(entity.getDifficulty())
                 .build();
     }
 }
