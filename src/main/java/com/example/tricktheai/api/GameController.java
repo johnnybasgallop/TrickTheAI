@@ -1,6 +1,7 @@
 package com.example.tricktheai.api;
 
 import com.example.tricktheai.application.ChangeGameModeUseCase;
+import com.example.tricktheai.application.DeleteGameUseCase;
 import com.example.tricktheai.application.SendMessageUseCase;
 import com.example.tricktheai.application.StartGameUseCase;
 import com.example.tricktheai.domain.model.PlayerInput;
@@ -22,6 +23,7 @@ public class GameController {
     private final SendMessageUseCase sendMessageUseCase;
     private final GameSessionRepository gameSessionRepository;
     private final ChangeGameModeUseCase changeGameModeUseCase;
+    private final DeleteGameUseCase deleteGameUseCase;
 
     @PostMapping("/start")
     public ResponseEntity<StartGameResponseDTO> startGame(){
@@ -56,5 +58,11 @@ public class GameController {
         ChangeGameModeResponseDTO response = changeGameModeUseCase.changeGameMode(request.getGameId(), GameMode.valueOf(request.getGameMode()));
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<DeleteGameResponseDTO> deleteGame(@RequestBody DeleteGameRequestDTO request){
+        DeleteGameResponseDTO res = deleteGameUseCase.deleteGame(request.getGameId());
+        return ResponseEntity.ok(res);
     }
 }
